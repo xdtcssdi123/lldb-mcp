@@ -14,11 +14,12 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-// PTY functions are not in standard POSIX headers on macOS
+#ifdef __APPLE__
 extern "C" int posix_openpt(int);
 extern "C" int grantpt(int);
 extern "C" int unlockpt(int);
 extern "C" char* ptsname(int);
+#endif
 
 namespace lldb_mcp {
 

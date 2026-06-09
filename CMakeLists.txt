@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Boost 1.79+
-set(Boost_NO_BOOST_CMAKE OFF)
-find_package(Boost 1.79 CONFIG REQUIRED COMPONENTS filesystem json)
+find_package(Boost 1.79 REQUIRED COMPONENTS filesystem json)
 
 add_executable(lldb-mcp
     src/main.cpp
@@ -23,6 +22,7 @@ target_link_libraries(lldb-mcp PRIVATE
     Boost::json
 )
 
-if(APPLE)
-    target_link_libraries(lldb-mcp PRIVATE util)
+# Linux needs _GNU_SOURCE for cfmakeraw, TIOCSCTTY, posix_openpt, etc.
+if(NOT APPLE)
+    target_compile_definitions(lldb-mcp PRIVATE _GNU_SOURCE)
 endif()
