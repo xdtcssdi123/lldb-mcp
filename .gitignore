@@ -1,0 +1,5 @@
+build/
+*.dSYM/
+test_rec
+test_bug
+.DS_Store
