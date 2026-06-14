@@ -1,5 +1,6 @@
 build/
 *.dSYM/
-test_rec
-test_bug
 .DS_Store
+tests/test_rec
+tests/test_bug
+tests/test_args
